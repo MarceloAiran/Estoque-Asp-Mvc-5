@@ -1,0 +1,44 @@
+﻿@model IList<Estoque.Models.Produto>
+
+<table class="table table-hover">
+    <thead>
+         <tr>
+            <th> Id </th>
+            <th> Produto </th>
+            <th> Preco </th>
+            <th>Decrementa</th>
+            <th>Incrementa</th>
+        </tr>
+   </thead>
+   <tbody>
+        @foreach (var produto in Model)
+         {
+             <tr>                          
+                 <td>@produto.Id</td>
+                 <td>@Html.RouteLink(produto.Nome, "VisualizaProduto", new { id = produto.Id })</td>
+                 <td id="quantidade@(produto.Id)">@produto.Quantidade</td>
+                 <td><a href="#" onclick="decrementa(@produto.Id);"><span class="glyphicon glyphicon-minus"></span></a></td>
+                 <td><a href="#" onclick="incrementa(@produto.Id);"><span class="glyphicon glyphicon-plus"></span></a></td>
+             </tr>
+         }
+   </tbody>
+</table>
+
+     
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+
+    function decrementa(produtoId) {
+        var url = "@Url.Action("DecrementaQtd" , "Produto")";
+        $.post(url, { id: produtoId }, function (resposta) {
+           $("#quantidade" + resposta.Id).html(resposta.Quantidade);
+        });
+    }
+    function incrementa(produtoId) {
+        var url = "@Url.Action("IncrementaQtd" , "Produto")";
+        $.post(url, { id: produtoId }, function (resposta) {
+           $("#quantidade" + resposta.Id).html(resposta.Quantidade);
+        });
+    }
+
+</script>

@@ -1,0 +1,20 @@
+﻿@model Estoque.Models.CategoriaDoProduto
+
+@{
+    ViewBag.Title = "Form";
+}
+
+<h2>Form</h2>
+
+<form action="/CategoriaDoProduto/Adiciona" method="post">
+    
+    <label for="nome">Nome:</label>
+    <input id="nome" name="categoria.Nome" />
+
+    <label for="descricao">Descrição:</label>
+    <input id="descricao" name="categoria.Descricao" />
+    
+
+    <input type="submit" />
+</form>
+
